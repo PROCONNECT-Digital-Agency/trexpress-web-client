@@ -137,6 +137,7 @@ const ModalPay = ({atmosToken}) => {
       toast.success("Success!");
       console.log("OTP RESULT. EXPECT CARD TOKEN TO SAVE", data.data);
       saveCardStorage({
+        id: data.data.data.card_id,
         card_id: data.data.data.card_id,
         pan: data.data.data.pan,
         card_token: data.data.data.card_token,
