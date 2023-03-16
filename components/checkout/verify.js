@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MessageInput from "../form/msg-input";
@@ -86,7 +87,7 @@ const Verify = ({
         ...order.data,
         shops: order.shops,
       })
-        .then((res) => {
+        .then(async (res) => {
           setOrderedData(res.data);
           setOrderId(res.data.id);
           if (payment.tag === "cash" || payment.tag === "wallet") {
@@ -107,12 +108,83 @@ const Verify = ({
               });
           } else if (payment.tag === "paypal" || payment.tag === "stripe") {
             pay({ createdOrderData: res.data });
+          } else if (payment.card_id) {
+            try {
+              const txCreateRes = await axios.post(
+                "https://partner.paymo.uz/merchant/pay/create",
+                {
+                  amount: res.data.price * 100,
+                  account: res.data.id,
+                  store_id: 1112
+                },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${atmosToken}`,
+                    Accept: "application/json",
+                  }
+                }
+              );
+
+              if (txCreateRes.data.result.code != 'OK') {
+                throw txCreateRes.data.result;
+              }
+
+              await TransactionsApi.create(res.data.id, {
+                payment_sys_id: 7,
+                payment_trx_id: txCreateRes.data.transaction_id
+              });
+
+              const txPreconfirmRes = await axios.post(
+                "https://partner.paymo.uz/merchant/pay/pre-confirm",
+                {
+                  card_token: payment.card_token,
+                  store_id: 1112,
+                  transaction_id: txCreateRes.data.transaction_id
+                },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${atmosToken}`,
+                    Accept: "application/json",
+                  }
+                }
+              );
+
+              if (txPreconfirmRes.data.result.code != 'OK') {
+                throw txPreconfirmRes.data.result;
+              }
+
+              const txConfirmRes = await axios.post(
+                "https://partner.paymo.uz/merchant/pay/confirm",
+                {
+                  otp: "111111",
+                  store_id: 1112,
+                  transaction_id: txCreateRes.data.transaction_id
+                },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${atmosToken}`,
+                    Accept: "application/json",
+                  }
+                }
+              );
+
+              if (txConfirmRes.data.result.code != 'OK') {
+                throw txConfirmRes.data.result;
+              }
+
+              dispatch(clearOrderShops());
+              dispatch(clearCart());
+              dispatch(clearOrder());
+              setCheckoutContent("status");
+            } catch(error) {
+              console.error(error);
+              toast.error(error.description || error.response?.data?.message);
+            }
           }
         })
-        .catch((error) => {
-          console.error(error);
-          toast.error(error.response?.data?.message);
-        });
     } else {
       toast.error("Plese select payment type");
     }
