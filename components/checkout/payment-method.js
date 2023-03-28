@@ -17,6 +17,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../utils/contexts/AuthContext";
 import { SettingsContext } from "../../utils/contexts/SettingContext";
 import axios from "axios";
+import { Button } from "antd";
+
 const PaymentMethod = ({
   setCheckoutContent,
   setStepKey,
@@ -159,7 +161,7 @@ const PaymentMethod = ({
     }
   };
 
-  const handleCardDelete = async ({ card_id, card_token }) => {
+  const handleCardDelete = async (card_id, card_token) => {
     console.table({ card_id, card_token });
     try {
       const data = await axios.post(
@@ -250,55 +252,40 @@ const PaymentMethod = ({
               )}
               {savedCards?.length > 0 &&
                 savedCards.map(
-                  ({ card_id, expiry, pan, card_holder, card_token }) => (
+                  card => (
                     <div
-                      key={card_id}
+                      key={card.id}
                       className="method-item"
-                      onClick={() => {
-                        setPaymethod("creditCard");
-                      }}
+                      onClick={() => handleClick(card)}
                     >
-                      <div className="savedCardList">
-                        <div className="leftSide">
-                          <p>{pan}</p>
-                          <p>{card_holder}</p>
-                        </div>
-                        <div className="rightSide">
-                          <img
-                            className="cardImg"
-                            src={
-                              pan.substr(0, 4) === "9860"
-                                ? "./assets/images/humo.svg"
-                                : ""
-                            }
-                            alt="card logo"
-                          />
-                          <div className="underCardImg">
-                            <p>{expiry.substr(2)}/</p>
-                            <p>{expiry.substr(0, 2)}</p>
-                            <Button
-                              ghost
-                              onClick={() =>
-                                handleCardDelete({ card_id, card_token })
-                              }
-                            >
-                              X
-                            </Button>
-                          </div>
-                        </div>
-                        {/* <div className="type">
-                        <RecordCircleLineIcon color="#61DC00" size={20} />
-                        <CheckboxBlankCircleLineIcon size={20} />
-                        <span>тайп тэг</span>
-                      </div> */}
-                        {/* <div className="price">67868868</div> */}
+                    <div className="shipping-type">
+                      <div className="type">
+                        {paymentId?.id === card.id ? (
+                            <RecordCircleLineIcon color="#61DC00" size={20} />
+                          ) : (
+                            <CheckboxBlankCircleLineIcon size={20} />
+                          )}
+                        <span>{card.pan}</span>
+                        <Button
+                          onClick={() =>
+                            handleCardDelete(card.id, card.token)
+                          }
+                        >
+                          X
+                        </Button>
                       </div>
-                      {/* <div className="delivery-time">
-                      {type?.translation?.title}
-                    </div> */}
+                      {card.pan.substr(0, 4) === "9860" &&
+                        <img
+                          className="method-icon"
+                          src="./assets/images/humo.svg"
+                          alt="Humo"
+                        />}
                     </div>
-                  )
-                )}
+                    <div className="delivery-time">
+                    </div>
+                  </div>
+                )
+              )}
               <ModalPay totalAmount={totalAmount} atmosToken={atmosToken} />
             </div>
           </div>
