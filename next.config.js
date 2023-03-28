@@ -7,7 +7,6 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   env: {
-    ATMOS_TOKEN: "49454fd3-f7a7-3ec4-93a5-91811104fd70",
     MAP_KEY: "AIzaSyCjcdsFmCp9IITrBKL-QGPamisSvR4yUBY",
     API_URL: "https://api.trexpress.uz",
     DEFAULT_LOCATION: `${41.2646},${69.2163}`,

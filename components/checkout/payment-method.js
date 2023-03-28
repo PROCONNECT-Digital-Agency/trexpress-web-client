@@ -24,6 +24,7 @@ const PaymentMethod = ({
   setPayment,
   deliveryType,
   setPaymethod,
+  atmosToken
 }) => {
   const { t: tl } = useTranslation();
   const dispatch = useDispatch();
@@ -158,6 +159,34 @@ const PaymentMethod = ({
     }
   };
 
+  const handleCardDelete = async ({ card_id, card_token }) => {
+    console.table({ card_id, card_token });
+    try {
+      const data = await axios.post(
+        "https://partner.paymo.uz/partner/remove-card",
+        {
+          id: String(card_id),
+          token: String(card_token),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${atmosToken}`,
+            Host: "partner.paymo.uz",
+            "Content-Length": 64,
+          },
+        }
+      );
+      console.log("RESPONSE AFTER CARD DELETE", data.data);
+      const updatedArr = savedCards.filter((el) => el.card_id !== card_id);
+      console.log("found current card and deleted", updatedArr);
+      localStorage.setItem("savedCards", updatedArr);
+      setSavedCards(updatedArr);
+    } catch (error) {
+      console.error("FAILED TO DELETE CARD", error);
+    }
+  };
+
   useEffect(() => {
     getCardsStorage();
   }, []);
@@ -220,43 +249,57 @@ const PaymentMethod = ({
                 <DiscordLoader />
               )}
               {savedCards?.length > 0 &&
-                savedCards.map(({ card_id, expiry, pan, card_holder }) => (
-                  <div
-                    key={card_id}
-                    className="method-item"
-                    onClick={() => {
-                      setPaymethod("creditCard");
-                    }}
-                  >
-                    <div className="shipping-type">
-                      <p>{card_id}</p>
-                      <p>{pan}</p>
-                      <p>CARD_HOLDER {card_holder}</p>
-                      <div style={{ display: "flex", gap: 10 }}>
-                        {/* <img
-                          src={
-                            card_number.substr(0, 4) === "9860"
-                              ? "./assets/images/humo.svg"
-                              : ""
-                          }
-                          alt="card logo"
-                        /> */}
-                        <p>year:{expiry.substr(0, 2)}</p>
-                        <p>month:{expiry.substr(2)}</p>
-                      </div>
-                      {/* <div className="type">
+                savedCards.map(
+                  ({ card_id, expiry, pan, card_holder, card_token }) => (
+                    <div
+                      key={card_id}
+                      className="method-item"
+                      onClick={() => {
+                        setPaymethod("creditCard");
+                      }}
+                    >
+                      <div className="savedCardList">
+                        <div className="leftSide">
+                          <p>{pan}</p>
+                          <p>{card_holder}</p>
+                        </div>
+                        <div className="rightSide">
+                          <img
+                            className="cardImg"
+                            src={
+                              pan.substr(0, 4) === "9860"
+                                ? "./assets/images/humo.svg"
+                                : ""
+                            }
+                            alt="card logo"
+                          />
+                          <div className="underCardImg">
+                            <p>{expiry.substr(2)}/</p>
+                            <p>{expiry.substr(0, 2)}</p>
+                            <Button
+                              ghost
+                              onClick={() =>
+                                handleCardDelete({ card_id, card_token })
+                              }
+                            >
+                              X
+                            </Button>
+                          </div>
+                        </div>
+                        {/* <div className="type">
                         <RecordCircleLineIcon color="#61DC00" size={20} />
                         <CheckboxBlankCircleLineIcon size={20} />
                         <span>тайп тэг</span>
                       </div> */}
-                      {/* <div className="price">67868868</div> */}
-                    </div>
-                    {/* <div className="delivery-time">
+                        {/* <div className="price">67868868</div> */}
+                      </div>
+                      {/* <div className="delivery-time">
                       {type?.translation?.title}
                     </div> */}
-                  </div>
-                ))}
-              <ModalPay totalAmount={totalAmount} />
+                    </div>
+                  )
+                )}
+              <ModalPay totalAmount={totalAmount} atmosToken={atmosToken} />
             </div>
           </div>
         </div>
@@ -291,7 +334,7 @@ export default PaymentMethod;
 //       {
 //         headers: {
 //           "Content-Type": "application/json",
-//           Authorization: `Bearer ${process.env.ATMOS_TOKEN}`,
+//           Authorization: `Bearer ${atmosToken}`,
 //           Host: "partner.paymo.uz",
 //           "Content-Length": 32,
 //         },

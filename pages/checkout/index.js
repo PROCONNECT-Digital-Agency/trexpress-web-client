@@ -30,6 +30,7 @@ const Checkout = () => {
   const [open, setOpen] = useState(false);
   const [paymethod, setPaymethod] = useState("");
   const [deliveryType, setDeliveryType] = useState(null);
+  const [atmosToken, setAtmosToken] = useState(null);
   const handleDrawer = (e) => {
     setOpen(e);
     dispatch(clearOrderShops());
@@ -63,6 +64,14 @@ const Checkout = () => {
   useEffect(() => {
     if (!address?.length) getUser();
   }, []);
+
+  useEffect(() => {
+    axios
+      .post(process.env.API_URL + "/api/v1/payments/atmos-token")
+      .then(res => { console.log(res); setAtmosToken(res.data.token)})
+      .catch(error => console.error(error))
+  }, []);
+
   return (
     <>
       <SEO />
@@ -83,6 +92,7 @@ const Checkout = () => {
             setStepKey={setStepKey}
             setPayment={setPayment}
             deliveryType={deliveryType}
+            atmosToken={atmosToken}
           />
         )}
         {checkoutContent === "verify" && (
@@ -93,6 +103,7 @@ const Checkout = () => {
             setOrderId={setOrderId}
             payment={payment}
             pay={pay}
+            atmosToken={atmosToken}
           />
         )}
         {checkoutContent === "status" && <Status orderId={orderId} />}

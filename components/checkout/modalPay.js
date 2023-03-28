@@ -15,7 +15,7 @@ import { SettingsContext } from "../../utils/contexts/SettingContext";
 import { Button } from "antd";
 import { toast } from "react-toastify";
 
-const ModalPay = () => {
+const ModalPay = ({atmosToken}) => {
   const [open, setOpen] = useState(false);
   const cookies = parseCookies();
   const [card, setCard] = useState({});
@@ -88,7 +88,7 @@ const ModalPay = () => {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${process.env.ATMOS_TOKEN}`,
+              Authorization: `Bearer ${atmosToken}`,
               Host: "partner.paymo.uz",
               "Content-Length": 57,
               Accept: "application/json",
@@ -127,7 +127,7 @@ const ModalPay = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.ATMOS_TOKEN}`,
+            Authorization: `Bearer ${atmosToken}`,
             Host: "partner.paymo.uz",
             "Content-Length": 44,
             Accept: "application/json",
@@ -171,7 +171,7 @@ const ModalPay = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.ATMOS_TOKEN}`,
+            Authorization: `Bearer ${atmosToken}`,
             Host: "partner.paymo.uz",
             "Content-Length": 64,
           },

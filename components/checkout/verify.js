@@ -22,6 +22,7 @@ const Verify = ({
   setOrderId,
   pay,
   payment,
+  atmosToken
 }) => {
   const { t: tl } = useTranslation();
   const { getUser } = useContext(MainContext);
