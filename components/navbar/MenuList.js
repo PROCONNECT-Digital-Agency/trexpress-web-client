@@ -149,29 +149,16 @@ export const MenuList = () => {
         style={{ display: `${display}` }}
       >
         {childrens?.length > 0 &&
-          childrens.map(({ translation: { title }, id }, index) => {
-            return (
-                <div key={index} className="subMenuHover">
-                  <Link href={`/all-product?category_id=${id}`} key={index}>
-                    <p>{title}</p>
-                  </Link>
-                  {/*<div>*/}
-                  {/*  {children?.map((el, index) => (*/}
-                  {/*    <Link*/}
-                  {/*      href={{*/}
-                  {/*        pathname: `/all-product`,*/}
-                  {/*        query: {*/}
-                  {/*          category_id: el.id,*/}
-                  {/*        },*/}
-                  {/*      }}*/}
-                  {/*      key={index}*/}
-                  {/*    >*/}
-                  {/*      <p>{el.translation?.title}</p>*/}
-                  {/*    </Link>*/}
-                  {/*  ))}*/}
-                  {/*</div>*/}
-                </div>
-            );
+          childrens.map((item, index) => {
+            if(item.translation) {
+              return (
+                  <div key={index} className="subMenuHover">
+                    <Link href={`/all-product?category_id=${item.id}`} key={index}>
+                      <p>{item.translation.title}</p>
+                    </Link>
+                  </div>
+              );
+            }
           })}
       </div>
     </div>
