@@ -141,7 +141,8 @@ export const SettingsContextProvider = ({ children }) => {
   }, []);
 
   const saveCardStorage = (card) => {
-    setSavedCards([...savedCards, card]);
+    savedCards = [...savedCards, card];
+    setSavedCards(savedCards);
     localStorage.setItem("savedCards", JSON.stringify(savedCards));
   };
 
