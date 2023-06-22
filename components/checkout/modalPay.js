@@ -95,9 +95,22 @@ const ModalPay = ({atmosToken}) => {
             },
           }
         );
-        console.log(data.data);
-        setTxid(data.data.transaction_id);
-        setStep("otp");
+        if(data.data.data && data.data.data.card_id) {
+          saveCardStorage({
+            id: data.data.data.card_id,
+            card_id: data.data.data.card_id,
+            pan: data.data.data.pan,
+            card_token: data.data.data.card_token,
+            expiry: data.data.data.expiry,
+            card_holder: data.data.data.card_holder,
+          });
+          setOpen(false);
+          setStep("addCard");
+          setOtp("");
+        } else {
+          setTxid(data.data.transaction_id);
+          setStep("otp");
+        }
       } catch (e) {
         toast.error("Somth went wrong...");
         console.error(e);
