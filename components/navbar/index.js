@@ -19,7 +19,7 @@ import { MenuList } from "./MenuList";
 import { MenuList2 } from "./MenuList2";
 import { Avatar, Badge } from "antd";
 import Image from "next/image";
-
+import Logo from "../../public/assets/images/lightThemeLogo.png"
 const Navbar = ({ handleContent }) => {
   const { t: tl } = useTranslation();
   const router = useRouter();
@@ -71,9 +71,10 @@ const Navbar = ({ handleContent }) => {
           {windowSize.width > 768 && (
             <Link href="/">
               <Image
-                width={200}
-                height={80}
-                src={`/assets/images/${theme}ThemeLogo.png`}
+                width={160}
+                height={40}
+                style={{objectFit: "cover"}}
+                src={Logo}
                 alt="logo"
               />
             </Link>
@@ -89,7 +90,7 @@ const Navbar = ({ handleContent }) => {
           {(isEmpty || !cookies?.access_token) && (
             <Link href="/auth/sign-in">
               <a className="login-btn">
-                <LoginCircleLineIcon size={20} />
+                <LoginCircleLineIcon size={18} />
                 <span>{tl("Login")}</span>
               </a>
             </Link>
@@ -97,14 +98,14 @@ const Navbar = ({ handleContent }) => {
           <Link href="/stores/liked-product">
             <a className="square">
               <Badge overflowCount={9} count={savedProduct.length}>
-                <HeartLineIcon size={20} />
+                <HeartLineIcon size={18} />
               </Badge>
               <span>{tl("Favorite")}</span>
             </a>
           </Link>
           <div className="cart-amount" onClick={() => click("order-list")}>
             <Badge overflowCount={9} count={cart.cartItems.length}>
-              <ShoppingCartLineIcon size={20} />
+              <ShoppingCartLineIcon size={18} />
             </Badge>
             <span>{tl("Basket")}</span>
           </div>

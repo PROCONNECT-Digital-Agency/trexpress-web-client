@@ -38,22 +38,34 @@
 .ant-modal-close {
   display: none !important;
 
-  @media (max-width: 1000px) {
+
+}
+
+@media (max-width: 1000px) {
+  .ant-modal-close {
     top: 0 !important;
     height: 70vh !important;
     width: 40vh !important;
     margin: auto !important;
   }
-  @media (max-width: 760px) {
+
+}
+@media (max-width: 760px) {
+  .ant-modal-close {
     height: 90vh !important;
     width: 30vh !important;
   }
 }
+
 .rh5v-DefaultPlayer_video {
   object-fit: cover !important;
   height: 100%;
   width: 100%;
-  @media (max-width: 1000px) {
+
+}
+
+@media (max-width: 1000px) {
+  .rh5v-DefaultPlayer_video {
     height: 70vh;
     top: 0 !important;
     right: 0 !important;

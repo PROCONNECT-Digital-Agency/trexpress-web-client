@@ -105,7 +105,7 @@ export const MenuList = () => {
           <Link href="/stores/often-buy">
             <div className="btn sideBtn link">
               <div className="label">
-                <FlashlightFillIcon size={32} color="#61DC00" />
+                <FlashlightFillIcon size={28} color="#61DC00" />
                 {/* {router.pathname !== "/products/[id]" && (
 
                 )} */}
@@ -116,7 +116,7 @@ export const MenuList = () => {
           <Link href="/stores/profitable">
             <div className="btn sideBtn link">
               <div className="label">
-                <CheeseLineIcon />
+                <CheeseLineIcon size={28} />
                 <p>{tl("Advantageous")}</p>
               </div>
             </div>

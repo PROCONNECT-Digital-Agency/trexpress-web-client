@@ -21,6 +21,7 @@ import { ProductApi } from "../../api/main/product";
 import useWindowSize from "../../utils/hooks/useWindowSize";
 import SEO from "../../components/seo";
 import ProductLoader from "../../components/loader/product";
+import ReactHTMLParser from 'react-html-parser';
 const ProductDetail = ({ productData }) => {
   const windowSize = useWindowSize();
   const { t: tl } = useTranslation();
@@ -30,6 +31,7 @@ const ProductDetail = ({ productData }) => {
   const [relatedProduct, setRelatedProduct] = useState(null);
   const [targetImgExtra, setTargetImgExtra] = useState([]);
   const dispatch = useDispatch();
+
   const likedProducts = useSelector(
     (state) => state.savedProduct.savedProductList
   );
@@ -77,6 +79,7 @@ const ProductDetail = ({ productData }) => {
   const targetImg = targetImgExtra.find(
     (item) => item?.group?.type === "image"
   );
+
   return (
     <>
       <SEO
@@ -118,7 +121,7 @@ const ProductDetail = ({ productData }) => {
             <div className="store-description">
               <div className="description">
                 <div className="title">{tl("Description")}</div>
-                <p>{data.translation.description}</p>
+                {ReactHTMLParser(data.translation.description)}
               </div>
               <div className="information">
                 <div className="items">

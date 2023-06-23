@@ -29,17 +29,6 @@ const Footer = ({appStore, playMarket}) => {
     }
   };
 
-  /*   new Array(6).fill("Lorem ipsum").forEach((el, index) =>
-    accordion.push(
-      <AccordionDetails key={index}>
-        <a href={settings[""]} target="_blank">
-          {el}
-        </a>
-      </AccordionDetails>
-    )
-  ); */
-
-
 
   const makeColumns = (num) => {
     return new Array(num).fill("Lorem").map((el, index) => (
@@ -64,135 +53,98 @@ const Footer = ({appStore, playMarket}) => {
       <div className="footer">
         {/*  <UpFooter /> */}
         <div className="allUnderFooter">
-          <div className="upperFooter">
-            {windowSize.width > 768 ? (
-              <div className="footerCols">
-                <div className="footer-inner">
-                  {/* <Image
-                    width={400}
-                    height={100}
-                    src={`/assets/images/${theme}ThemeLogo.png`}
-                    alt="logo"
-                  /> */}
-                  <h1 className="title">TRExpress</h1>
-                  <ul
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 200,
-                    }}
-                  >
-                    {firstCol}
-                  </ul>
-                </div>
-                <div className="footer-inner">
-                  <h1 className="title">About us</h1>
-                  <ul
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 200,
-                    }}
-                  >
-                    {secondCol}
-                  </ul>
-                </div>
-                <div className="footer-inner">
-                  <h1 className="title">Social Media</h1>
-                  <ul
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
+          {/*<div className="upperFooter">*/}
+          {/*  {windowSize.width > 768 ? (*/}
+          {/*    <div className="footerCols">*/}
+          {/*      <div className="footer-inner">*/}
+          {/*        <h1 className="title">TRExpress</h1>*/}
+          {/*        <ul*/}
+          {/*          style={{*/}
+          {/*            display: "flex",*/}
+          {/*            flexDirection: "column",*/}
+          {/*            height: 200,*/}
+          {/*          }}*/}
+          {/*        >*/}
+          {/*          {firstCol}*/}
+          {/*        </ul>*/}
+          {/*      </div>*/}
+          {/*      <div className="footer-inner">*/}
+          {/*        <h1 className="title">About us</h1>*/}
+          {/*        <ul*/}
+          {/*          style={{*/}
+          {/*            display: "flex",*/}
+          {/*            flexDirection: "column",*/}
+          {/*            height: 200,*/}
+          {/*          }}*/}
+          {/*        >*/}
+          {/*          {secondCol}*/}
+          {/*        </ul>*/}
+          {/*      </div>*/}
+          {/*      <div className="footer-inner">*/}
+          {/*        <h1 className="title">Social Media</h1>*/}
+          {/*        <ul*/}
+          {/*          style={{*/}
+          {/*            display: "flex",*/}
+          {/*            flexDirection: "column",*/}
 
-                      height: 200,
-                    }}
-                  >
-                    {thirdCol}
-                  </ul>
-                </div>
-                <div className="footer-inner">
-                  <h1 className="title">Lorem Ipsum</h1>
-                  <ul
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
+          {/*            height: 200,*/}
+          {/*          }}*/}
+          {/*        >*/}
+          {/*          {thirdCol}*/}
+          {/*        </ul>*/}
+          {/*      </div>*/}
+          {/*      <div className="footer-inner">*/}
+          {/*        <h1 className="title">Lorem Ipsum</h1>*/}
+          {/*        <ul*/}
+          {/*          style={{*/}
+          {/*            display: "flex",*/}
+          {/*            flexDirection: "column",*/}
 
-                      height: 200,
-                    }}
-                  >
-                    {fourCol}
-                  </ul>
-                </div>
-                <div className="footer-inner">
-                  <h1 className="title">Help</h1>
-                  <ul
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
+          {/*            height: 200,*/}
+          {/*          }}*/}
+          {/*        >*/}
+          {/*          {fourCol}*/}
+          {/*        </ul>*/}
+          {/*      </div>*/}
+          {/*      <div className="footer-inner">*/}
+          {/*        <h1 className="title">Help</h1>*/}
+          {/*        <ul*/}
+          {/*          style={{*/}
+          {/*            display: "flex",*/}
+          {/*            flexDirection: "column",*/}
 
-                      height: 200,
-                    }}
-                  >
-                    {fifthCol}
-                  </ul>
-                </div>
-              </div>
-            ) : (
-              /*     <>
-                <Accordion idList={idList} id={"social"}>
-                  <AccordionSummary
-                    handleClick={handleClick}
-                    idList={idList}
-                    id={"social"}
-                  >
-                    {tl("Social")}
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <p>{tl("Instagram")}</p>
-                  </AccordionDetails>
-                  <AccordionDetails>
-                    <p>{tl("Facebook")}</p>
-                  </AccordionDetails>
-                  <AccordionDetails>
-                    <p>{tl("Twitter")}</p>
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion idList={idList} id={"help"}>
-                  <AccordionSummary
-                    handleClick={handleClick}
-                    idList={idList}
-                    id={"help"}
-                  >
-                    {tl("Help")}
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <a href="/faq">{tl("FAQ")}</a>
-                  </AccordionDetails>
-                  <AccordionDetails>
-                    <a href="/term-of-use">{tl("Term of use")}</a>
-                  </AccordionDetails>
-                  <AccordionDetails>
-                    <a href="/privacy-policy">{tl("Privacy Policy")}</a>
-                  </AccordionDetails>
-                </Accordion>
-              </> */
-              <>
-                <Collapse>
-                  {new Array(4).fill("Lorem").map((el, index) => (
-                    <Panel header={el} key={index}>
-                      {new Array(6).fill("Lorem").map((el, index) => (
-                        <p header={el} key={index}>
-                          {el}
-                        </p>
-                      ))}
-                    </Panel>
-                  ))}
-                </Collapse>
-              </>
-            )}
-          </div>
-          {/* <div style={{borderBottom: '5px solid white', width: 1200, height: 20, background: "red"}} /> */}
+          {/*            height: 200,*/}
+          {/*          }}*/}
+          {/*        >*/}
+          {/*          {fifthCol}*/}
+          {/*        </ul>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  ) : (*/}
+          {/*    <>*/}
+          {/*      <Collapse>*/}
+          {/*        {new Array(4).fill("Lorem").map((el, index) => (*/}
+          {/*          <Panel header={el} key={index}>*/}
+          {/*            {new Array(6).fill("Lorem").map((el, index) => (*/}
+          {/*              <p header={el} key={index}>*/}
+          {/*                {el}*/}
+          {/*              </p>*/}
+          {/*            ))}*/}
+          {/*          </Panel>*/}
+          {/*        ))}*/}
+          {/*      </Collapse>*/}
+          {/*    </>*/}
+          {/*  )}*/}
+          {/*</div>*/}
           <div className="footerDown">
+            <div className="secTwo">
+              <Image
+                  src={`/assets/images/${theme}ThemeLogo.png`}
+                  alt="logo"
+                  width={300}
+                  height={70}
+              />
+            </div>
             <div className="secOne">
               <div className="store">
                 <Image
@@ -229,15 +181,7 @@ const Footer = ({appStore, playMarket}) => {
                 </a>
               </div>
             </div>
-            <div className="secTwo">
-              <Image
-                src={`/assets/images/${theme}ThemeLogo.png`}
-                alt="logo"
-                width={400}
-                height={100}
-              />
-              {/* <p>| Terms of Use | Privacy and Policy</p> */}
-            </div>
+
           </div>
         </div>
       </div>

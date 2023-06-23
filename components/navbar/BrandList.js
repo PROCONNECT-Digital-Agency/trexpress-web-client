@@ -35,7 +35,7 @@ export const BrandList = () => {
   const wid = wids.width
 
   return (
-    <>
+    <div className={"bran-list"}>
       <Swiper
         mousewheel={true}
         slidesPerView={wid > 1400 ? 12 : wid > 900 ? 6 : 3}
@@ -74,7 +74,7 @@ export const BrandList = () => {
               </SwiperSlide>
             ))}
       </Swiper>
-    </>
+    </div>
   );
 };
 //dry

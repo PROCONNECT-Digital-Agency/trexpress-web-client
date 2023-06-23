@@ -68,35 +68,6 @@ const SerachFilter = ({ className }) => {
         }
       >
         <div className="search-input-wrapper">
-          {/*  <Category /> */}
-          {/* {router.pathname === "/products/[id]"  && (
-            <Link href={`/stores/${shop.uuid}`}>
-              <a className="current-store">
-                <div className="logo">
-                  <img src={imgBaseUrl + shop?.logo_img} alt="Logo" />
-                </div>
-                <div className="data">
-                  <div className="name">{shop?.translation?.title}</div>
-                  <div className="type">{tl("Store")}</div>
-                </div>
-              </a>
-            </Link>
-          )} */}
-          {/*  {router.pathname === "/" && (
-            new Array(10).fill("Store").map(el => 
-              <Link href={`/stores/${shop.uuid}`}>
-              <a className="current-store">
-                <div className="logo">
-                  <img src={imgBaseUrl + shop?.logo_img} alt="Logo" />
-                </div>
-                <div className="data">
-                  <div className="name">{shop?.translation?.title}</div>
-                  <div className="type">{tl("Store")}</div>
-                </div>
-              </a>
-            </Link>
-              )
-          )} */}
           <div className={`search-filter ${className}`}>
             <Search2LineIcon size={20} onClick={() => handleClick("search")} />
             <input
@@ -127,7 +98,6 @@ const SerachFilter = ({ className }) => {
               setSearchTerm={setSearchTerm}
               setIsOpen={setIsOpen}
             />
-            {/*  <FilterContent isSearching={isSearching} isOpen={isOpen} /> */}
           </div>
         </div>
         <div className="filter-links"></div>

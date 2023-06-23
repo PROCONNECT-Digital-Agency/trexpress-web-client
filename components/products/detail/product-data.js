@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { MainContext } from "../../../utils/contexts/MainContext";
 import { useTranslation } from "react-i18next";
 import { getPrice } from "../../../utils/getPrice";
-
+import ReactHTMLParser from 'react-html-parser';
 const ProductData = ({
   setOpen,
   product,
@@ -287,22 +287,13 @@ const ProductData = ({
         <div className="stock">
           <div>seller</div>
           <div className="inStock">
-            <img src="/assets/images/inStock.png" alt="in stock" />
+            <img src="/assets/images/inStock.png" />
             <span>{`${
               showExtras?.stock?.quantity >= 0
                 ? showExtras?.stock?.quantity + tl(" in stock")
                 : tl("out of stock")
             }`}</span>
           </div>
-
-          {/*  <div>
-         <StockIcon />
-          <span>{`${
-            showExtras?.stock?.quantity >= 0
-              ? showExtras?.stock?.quantity + tl(" in stock")
-              : tl("out of stock")
-          }`}</span>
-         </div> */}
         </div>
       </div>
 
@@ -338,7 +329,7 @@ const ProductData = ({
           >
             {tl("Description")}
           </AccordionSummary>
-          <AccordionDetails>{description}</AccordionDetails>
+          <AccordionDetails>{ReactHTMLParser(description)}</AccordionDetails>
         </Accordion>
         {properties?.map((item, id) => {
           return (
