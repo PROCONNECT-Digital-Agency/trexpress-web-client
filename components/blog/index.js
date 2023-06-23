@@ -38,109 +38,95 @@ const Blog = () => {
   const wid = width.width;
 
   return (
-    <div className="blog-wrapper">
-      <div className="blog">
-        <div className="blog-items">
-          {true ? (
+    <>
+      {arr && <div className="blog-wrapper">
+        <div className="blog">
+          <div className="blog-items">
             <div className="storiesList">
               <Swiper
-                className="swiperStoriesList"
-                freeMode={false}
-                modules={[Mousewheel, FreeMode, Navigation]}
-                pagination={true}
-                slidesPerGroup={4}
-                slidesPerView={
-                  wid > 1500
-                    ? 6
-                    : wid > 1220
-                    ? 5
-                    : wid > 1000
-                    ? 4
-                    : wid > 760
-                    ? 3
-                    : wid > 410
-                    ? 2
-                    : 1
-                }
-                spaceBetween={wid > 1400 && 50}
+                  className="swiperStoriesList"
+                  freeMode={false}
+                  modules={[Mousewheel, FreeMode, Navigation]}
+                  pagination={true}
+                  slidesPerGroup={4}
+                  slidesPerView={
+                    wid > 1500
+                        ? 6
+                        : wid > 1220
+                            ? 5
+                            : wid > 1000
+                                ? 4
+                                : wid > 760
+                                    ? 3
+                                    : wid > 410
+                                        ? 2
+                                        : 1
+                  }
+                  spaceBetween={wid > 1400 && 50}
               >
                 {arr &&
-                  arr.map((el, index) => {
-                    return (
-                      <SwiperSlide>
-                        <div
-                          className="eachVideo"
-                          onClick={() => handleClick(el.image_name)}
-                        >
-                          <div>
-                            <Image
-                              style={{
-                                height: 250,
-                                width: 200,
-                                borderRadius: 10,
-                              }}
-                              preview={false}
-                              src="/assets/images/be-seller-banner.png"
-                            />
-                          </div>
-                          <div className="underVideo">
-                            <p>{el.description}</p>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    );
-                  })}
+                    arr.map((el, index) => {
+                      return (
+                          <SwiperSlide>
+                            <div
+                                className="eachVideo"
+                                onClick={() => handleClick(el.image_name)}
+                            >
+                              <div>
+                                <Image
+                                    style={{
+                                      height: 250,
+                                      width: 200,
+                                      borderRadius: 10,
+                                    }}
+                                    preview={false}
+                                    src="/assets/images/be-seller-banner.png"
+                                />
+                              </div>
+                              <div className="underVideo">
+                                <p>{el.description}</p>
+                              </div>
+                            </div>
+                          </SwiperSlide>
+                      );
+                    })}
               </Swiper>
               <Modal
-                // className={cl.ant-modal cl.ant-modal-content}
-                destroyOnClose={true}
-                maskStyle={{
-                  opacity: 0.8,
-                  background: "rgba(0,0,0,1)",
-                }}
-                maskClosable={true}
-                mask={true}
-                closable={true}
-                open={modalOpen}
-                onCancel={() => setModalOpen(false)}
-                onClick={() => setModalOpen(false)}
-                style={{
-                  background: "transparent",
-                }}
+                  // className={cl.ant-modal cl.ant-modal-content}
+                  destroyOnClose={true}
+                  maskStyle={{
+                    opacity: 0.8,
+                    background: "rgba(0,0,0,1)",
+                  }}
+                  maskClosable={true}
+                  mask={true}
+                  closable={true}
+                  open={modalOpen}
+                  onCancel={() => setModalOpen(false)}
+                  onClick={() => setModalOpen(false)}
+                  style={{
+                    background: "transparent",
+                  }}
               >
                 <Video
-                  controls={["Volume"]}
-                  style={{
-                    top: 0,
-                    height: "100vh",
-                    wid: "50vh",
-                    borderRadius: 10,
-                    objectFit: "cover",
-                  }}
+                    controls={["Volume"]}
+                    style={{
+                      top: 0,
+                      height: "100vh",
+                      wid: "50vh",
+                      borderRadius: 10,
+                      objectFit: "cover",
+                    }}
                 >
-                  <source src={urlVideo} />
+                  <source src={urlVideo}/>
                 </Video>
-
-                {/* <CloseLineIcon
-                    className="closeModal"
-                    onClick={() => setModalOpen(false)}
-                  /> */}
               </Modal>
             </div>
-          ) : (
-            <>
-              <StoreLoader />
-              <StoreLoader />
-              <StoreLoader />
-              <StoreLoader />
-            </>
-          )}
+          </div>
         </div>
-        {/* {blogList?.length === 0 && (
-          <Empty image={images.ViewedProduct} text1="There are no stroies" />
-        )} */}
       </div>
-    </div>
+      }
+    </>
   );
 };
 

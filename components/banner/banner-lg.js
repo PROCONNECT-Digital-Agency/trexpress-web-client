@@ -58,7 +58,6 @@ const LgBanner = ({ handleContent, data }) => {
           <Bookmark3LineIcon size={20} color={savedStore && "#61DC00"} />
           <span>{tl("Saved")}</span>
         </div>
-        {/* onClick={() => click("store-rate")} */}
         <div className="reaction">
           <StarLineIcon size={20} />
           <span>

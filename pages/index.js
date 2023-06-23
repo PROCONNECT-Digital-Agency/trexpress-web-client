@@ -24,6 +24,7 @@ import ProductLoader from "../components/loader/product";
 import SkeletonInput from "../components/skelton/Skeleton-Input";
 import axios from "axios";
 import Link from "next/link";
+import NotFoundImage from "../public/assets/images/not-found-image.png"
 function Home() {
   const [discountList, setDiscountList] = useState(null);
   const [mostSales, setMostSales] = useState(null);
@@ -180,7 +181,6 @@ export default Home;
 export const StoreTemplate = ({ uuid, backImg, shopTitle }) => {
   const wids = useWindowSize();
   const wid = wids.width;
-
   return (
     <Col
       span={wid >= 900 ? 8 : 24}
@@ -189,15 +189,27 @@ export const StoreTemplate = ({ uuid, backImg, shopTitle }) => {
     >
       <div className="mainBlock">
         <div className="shopBanner">
-          <img
-            src={`https://api.trexpress.uz/storage/images/` + backImg}
-            className="shopImage"
-            width={wid < 900 ? 100 : 250}
-            height={wid < 900 ? 100 : 250}
-          />
+          {backImg ? (
+              <img
+                  src={`https://api.trexpress.uz/storage/images/` + backImg}
+                  className="shopImage"
+                  width={wid < 900 ? 100 : 250}
+                  height={wid < 900 ? 100 : 250}
+                  style={{width: "100%", objectFit: "cover"}}
+              />
+          ) : (
+              <img
+                  src={NotFoundImage}
+                  className="shopImage"
+                  width={wid < 900 ? 100 : 250}
+                  height={wid < 900 ? 100 : 250}
+                  style={{width: "100%", objectFit: "cover"}}
+              />
+          )}
+
         </div>
         <div className="shopInner">
-          <h3>{shopTitle}</h3>
+          <h3 style={{textTransform: "capitalize"}}>{shopTitle}</h3>
           <Link href={`/stores/${uuid}`}>
             <a
               style={{
@@ -208,14 +220,6 @@ export const StoreTemplate = ({ uuid, backImg, shopTitle }) => {
               <LoginCircleLineIcon size={20} />{" "}
             </a>
           </Link>
-
-          {/* <img
-            src={`https://api.trexpress.uz/storage/images/` + logo}
-            alt=""
-            width={30}
-            height={30}
-            style={{ borderRadius: "50%" }}
-          /> */}
         </div>
       </div>
     </Col>
