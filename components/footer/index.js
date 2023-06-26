@@ -51,7 +51,7 @@ const Footer = ({appStore, playMarket}) => {
   return (
     <>
       <div className="footer">
-        {/*  <UpFooter /> */}
+          {/*<UpFooter />*/}
         <div className="allUnderFooter">
           {/*<div className="upperFooter">*/}
           {/*  {windowSize.width > 768 ? (*/}
@@ -181,7 +181,11 @@ const Footer = ({appStore, playMarket}) => {
                 </a>
               </div>
             </div>
-
+          </div>
+          <div className={"footer-paragraph"}>
+            <p>
+              ООО "Intrade Safin"
+            </p>
           </div>
         </div>
       </div>

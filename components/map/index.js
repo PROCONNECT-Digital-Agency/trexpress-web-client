@@ -19,7 +19,7 @@ const GoogleMap = (props) => {
   const defaultLocation = cookies.userLocation
     ? cookies.userLocation.split(",")
     : process.env.DEFAULT_LOCATION.split(",");
-    console.log(defaultLocation);
+  console.log(defaultLocation);
   if (props.stores) {
     props.stores?.map((store) => {
       storeLocations.push({

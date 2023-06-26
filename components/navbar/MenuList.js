@@ -158,6 +158,8 @@ export const MenuList = () => {
                     </Link>
                   </div>
               );
+            } else {
+              setDisplay("none")
             }
           })}
       </div>
