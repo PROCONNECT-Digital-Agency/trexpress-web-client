@@ -29,9 +29,8 @@ const GetPosition = ({ setAddress, value, setValue }) => {
       <div className="input">
         <input
           onChange={(e) => setValue(e.target.value)}
-          value={value}
           ref={ref}
-          placeholder={tl("Search")}
+          placeholder="Search..."
         />
       </div>
     </div>

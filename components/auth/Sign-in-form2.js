@@ -98,10 +98,18 @@ export default function SignInForm2(){
                     }}/>
                     }
 
-                    <button align={"center"} style={{backgroundColor:"gray", padding:"8px", borderRadius:"10px"}}
-                    >Save</button>
-
-
+                    <button
+                        className={"sign-in-btn"}
+                        align={"center"}
+                        style={{
+                            backgroundColor:"blue",
+                            padding:"8px",
+                            borderRadius:"10px",
+                            color: "#fff !important"
+                        }}
+                    >
+                        Login
+                    </button>
                 </form>
             </div>
         </>
